@@ -51,6 +51,10 @@ function convertNativeProps(props) {
     newProps.barCodeTypes = [];
   }
 
+  if (typeof props.onFaceDetected == 'function') {
+    newProps.faceDetection = true;
+  }
+
   newProps.barcodeScannerEnabled = typeof props.onBarCodeRead === 'function'
 
   return newProps;
@@ -67,7 +71,8 @@ export default class Camera extends Component {
     CaptureQuality: CameraManager.CaptureQuality,
     Orientation: CameraManager.Orientation,
     FlashMode: CameraManager.FlashMode,
-    TorchMode: CameraManager.TorchMode
+    TorchMode: CameraManager.TorchMode,
+    FaceDetection: CameraManager.FaceDetection
   };
 
   static propTypes = {
@@ -97,9 +102,11 @@ export default class Camera extends Component {
     keepAwake: PropTypes.bool,
     onBarCodeRead: PropTypes.func,
     barcodeScannerEnabled: PropTypes.bool,
+    onFaceDetected: PropTypes.func,
     onFocusChanged: PropTypes.func,
     onZoomChanged: PropTypes.func,
     mirrorImage: PropTypes.bool,
+    faceDetection: PropTypes.bool,
     barCodeTypes: PropTypes.array,
     orientation: PropTypes.oneOfType([
       PropTypes.string,
@@ -127,6 +134,7 @@ export default class Camera extends Component {
     defaultOnFocusComponent: true,
     flashMode: CameraManager.FlashMode.off,
     playSoundOnCapture: true,
+    faceDetection: false,
     torchMode: CameraManager.TorchMode.off,
     mirrorImage: false,
     barCodeTypes: Object.values(CameraManager.BarCodeType),
@@ -150,6 +158,7 @@ export default class Camera extends Component {
 
   async componentWillMount() {
     this._addOnBarCodeReadListener()
+    this.faceDetectedListener = NativeAppEventEmitter.addListener('FaceDetected', this._onFaceDetected);
 
     let { captureMode } = convertNativeProps({ captureMode: this.props.captureMode })
     let hasVideoAndAudio = this.props.captureAudio && captureMode === Camera.constants.CaptureMode.video
@@ -160,6 +169,10 @@ export default class Camera extends Component {
       this.setState({ isAuthorized });
     }
   }
+
+  _onFaceDetected = (data) => {
+    if (this.props.onFaceDetected) this.props.onFaceDetected(data)
+  };
 
   componentWillUnmount() {
     this._removeOnBarCodeReadListener()
