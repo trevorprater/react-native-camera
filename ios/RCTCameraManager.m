@@ -883,7 +883,7 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
 
     BOOL didSendFace = NO;
-    BOOL isFrontCamera = self.presentCamera == RCTCameraTypeFront;
+    BOOL isFrontCamera = self.presetCamera == RCTCameraTypeFront;
 
     for (AVMetadataFaceObject *metadata in metadataObjects) {
         if([metadata.type isEqualToString:AVMetadataObjectTypeFace]) {
@@ -910,7 +910,7 @@ didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL
       }
     }
 
-    if !(didSendFace) {
+    if (!didSendFace) {
         [self.bridge.eventDispatcher sendAppEventWithName:@"FaceDetected" body:@{ @"isFrontCamera": @(isFrontCamera), @"bounds": [NSNull null] }];
     }
 }
