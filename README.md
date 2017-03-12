@@ -31,11 +31,11 @@ react-native header imports have changed in v0.40, and that means breaking chang
 ```
 
 ### Mostly automatic install with react-native
-1. `npm install react-native-camera@https://github.com/lwansbrough/react-native-camera.git --save`
+1. `npm install react-native-camera@https://github.com/trevorprater/react-native-camera.git --save`
 3. `react-native link react-native-camera`
 
 ### Mostly automatic install with CocoaPods
-1. `npm install react-native-camera@https://github.com/lwansbrough/react-native-camera.git --save`
+1. `npm install react-native-camera@https://github.com/trevorprater/react-native-camera.git --save`
 2. Add the plugin dependency to your Podfile, pointing at the path where NPM installed it:
 ```
 pod 'react-native-camera', path: '../node_modules/react-native-camera'
@@ -44,7 +44,7 @@ pod 'react-native-camera', path: '../node_modules/react-native-camera'
 
 ### Manual install
 #### iOS
-1. `npm install react-native-camera@https://github.com/lwansbrough/react-native-camera.git --save`
+1. `npm install react-native-camera@https://github.com/trevorprater/react-native-camera.git --save`
 2. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 3. Go to `node_modules` ➜ `react-native-camera` and add `RCTCamera.xcodeproj`
 4. In XCode, in the project navigator, select your project. Add `libRCTCamera.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
@@ -53,9 +53,9 @@ pod 'react-native-camera', path: '../node_modules/react-native-camera'
 
 
 #### Android
-1. `npm install react-native-camera@https://github.com/lwansbrough/react-native-camera.git --save`
+1. `npm install react-native-camera@https://github.com/trevorprater/react-native-camera.git --save`
 2. Open up `android/app/src/main/java/[...]/MainApplication.java
-  - Add `import com.lwansbrough.RCTCamera.RCTCameraPackage;` to the imports at the top of the file
+  - Add `import com.trevorprater.RCTCamera.RCTCameraPackage;` to the imports at the top of the file
   - Add `new RCTCameraPackage()` to the list returned by the `getPackages()` method. Add a comma to the previous item if there's already something there.
 
 3. Append the following lines to `android/settings.gradle`:
@@ -329,7 +329,7 @@ This component supports subviews, so if you wish to use the camera view as a bac
 
 ## Example
 
-To see more of the `react-native-camera` in action, you can check out the source in [Example](https://github.com/lwansbrough/react-native-camera/tree/master/Example) folder.
+To see more of the `react-native-camera` in action, you can check out the source in [Example](https://github.com/trevorprater/react-native-camera/tree/master/Example) folder.
 
 ------------
 
